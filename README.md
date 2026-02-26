@@ -875,3 +875,77 @@ Policy → Standard → Procedure → Guideline
 
 ## Domain 01: Security and Risk Management – Access Control
 
+
+### 1. Access Control Models (The "How")
+
+These models define the underlying rules and logic for **how** users are granted access to resources. Think of these as the architectural blueprints.
+
+| Model | Key Feature & Definition | Exam Tip & Example |
+| :--- | :--- | :--- |
+| **MAC** (Mandatory Access Control) | **LATTICE / LABELS.** Access is determined by the **system** based on security labels (e.g., Confidential, Secret, Top Secret). The data owner *cannot* override these rules. | If the question mentions **Military, Government, or "Confidential/Secret" labels**, the answer is almost always MAC. <br> *Example:* A user with a "Secret" clearance cannot read a "Top Secret" file, and the owner of that file cannot change those permissions. |
+| **DAC** (Discretionary Access Control) | **OWNER decides.** The owner of the resource has total "discretion" to pass permissions to others. | Most flexible but **least secure**. If a user is acting as the "Data Owner," they are operating in a DAC model. <br> *Example:* This is the default in most OS environments (like Windows or Linux file permissions, where a user can share a folder). |
+| **RBAC** (Role-Based Access Control) | **JOB FUNCTION.** Permissions are tied to a specific role or position, not an individual. | Best for high-turnover companies. Prevents "permission creep." <br> *Example:* A "DB Owner" role has full permissions, while a "DB Reader" role has read-only. When a new employee joins the team, you just assign them the role. |
+| **RuBAC** (Rule-Based Access Control) | **IF/THEN logic.** Access is granted based on global, predefined rules or filters. | Often confused with RBAC. Remember: RuBAC is usually a global rule applied to everyone. <br> *Example:* A firewall rule that says "No traffic allowed from IP 10.0.0.5 after 5 PM." |
+| **ABAC** (Attribute-Based Access Control) | **CONTEXT** (Subject, Object, Environmental factors). The most flexible and granular model, using policies that evaluate multiple attributes. | This is the most **complex/detailed** control. If the question asks for the most granular or dynamic control, choose ABAC. <br> *Example:* An **Auditor** (Subject) can view **Sales Records** (Object) only during **Quarter-End** (Environment) from a **Company Laptop** (Device). |
+| **Risk-Based Access Control** | **DYNAMIC ASSESSMENT.** Dynamically assesses the risk level of the access request in real-time. | Think "adaptive authentication." The system changes requirements based on perceived risk. <br> *Example:* If you log in from the office, you just need a password. If you log in from a foreign country at 3 AM, the system triggers MFA or blocks you entirely. |
+
+> **Exam Tip:** If a question asks who is responsible for assigning user permissions in a **MAC** environment, the answer is the **Administrator/System**, never the user.
+
+### 2. Access Control Categories & Functions (The "What")
+
+This section covers how we classify security controls. The CISSP exam loves to ask you to identify the correct category and function of a specific control.
+
+#### 2.1. Implementation Categories
+
+These are the three "buckets" every control falls into based on how it's implemented.
+
+1.  **Administrative (Managerial):** Think "Paper & People." These are "soft" controls like policies, procedures, background checks, security awareness training, and hiring practices.
+2.  **Technical (Logical):** Think "Bits & Bytes." These are "hard" controls implemented via software or hardware, such as firewalls, encryption, passwords, IDS, and ACLs.
+3.  **Physical:** Think "Bricks & Mortar." These controls protect the tangible environment, such as fences, locks, guards, dogs, lighting, and CCTV.
+
+#### 2.2. Functional Categories (The "Action")
+
+This describes what the control *does*. A single control can belong to one implementation category and one or more functional categories.
+
+| Type | Purpose | Example |
+| :--- | :--- | :--- |
+| **Preventive** | Stop an incident from happening. | Firewall, Lock, Encryption, MFA, Fence |
+| **Detective** | Identify an incident during or after it occurs. | CCTV, IDS, Security Logs, Motion Sensors, Audits |
+| **Corrective** | Fix the system or clean up after a problem. | Antivirus cleaning a file, Applying a patch, Re-imaging a compromised machine |
+| **Recovery** | Restore functionality and data after a disaster. | Offsite Backups, Disaster Recovery sites, High Availability (HA) systems |
+| **Deterrent** | Discourage a person from even attempting a violation. | Warning signs ("Beware of Dog"), Warning banners on login screens, Fences |
+| **Compensating** | A "Plan B" or alternative control used when the primary control is too expensive, complex, or impractical. | Using a security guard to check IDs (compensating) because you can't afford a biometric scanner; using pagers for 2FA if cell phones aren't allowed. |
+
+---
+
+### 3. Critical CISSP "Catch" Questions & Nuances
+
+The exam will test you on the intersection of these concepts.
+
+> **Q: Is a "Warning Banner" on a login screen a Technical or Administrative control?**
+> **A:** It is implemented **Technically** (as software), but its legal intent is **Administrative** (to establish policy and consent for monitoring). On the exam, focus on the *primary function*, which is **Deterrent**.
+
+> **Q: Is a Fence a Preventive or Physical control?**
+> **A:** It is **both**. It is a **Physical (Category)** control that performs a **Preventive (Function)** . The question may ask for either, so read carefully.
+
+> **Q: How do Least Privilege and Need to Know differ?**
+> **A:** This is a classic exam point.
+> *   **Least Privilege:** The user is only given the minimum permissions (e.g., Read, Write, Execute) necessary to perform their *job*.
+> *   **Need to Know:** Even if a user has the required clearance and the "Read" permission (Least Privilege), they are only allowed to access specific data if it is necessary for their *specific task*. For example, a General with Top Secret clearance doesn't have the "Need to Know" to read every single Top Secret file in the military.
+
+---
+
+### 4. 💡 Pro Exam Tips: The "Secret Sauce"
+
+These high-level tips are crucial for the CISSP mindset.
+
+1.  **"Think Like a Manager":** If a question asks for the "Best" or "First" way to fix a security issue, look for the **Administrative** answer first (Policy, Standard, or Training). You can't fix a human or process problem with a purely technical tool.
+2.  **Safety First:** In any CISSP question involving physical security, fire, or evacuations, **Human Life Safety** is always the #1 priority. If an option is "Save the data" and another is "Evacuate the staff," always choose the staff.
+3.  **The "Least" Rule:** Always scan the answer choices for **Least Privilege** and **Need to Know**. They are often the correct answer to principle-based questions, especially those involving permissions and data classification.
+---
+---
+
+
+## Domain 01: Security and Risk Management – Risk Management
+
+
